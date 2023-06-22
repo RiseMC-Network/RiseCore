@@ -56,6 +56,8 @@ public class MurderMysteryGameDeathListener implements Listener {
                 murderMysteryGame.playMassSound(Sound.ENTITY_VILLAGER_DEATH, 1.0F, 1.0F);
                 return;
             }
+
+            arrow.remove();
         }
 
         // handle murderer killing
@@ -85,7 +87,7 @@ public class MurderMysteryGameDeathListener implements Listener {
     }
 
     private MurderMysteryPlayer getGamePlayer(MurderMysteryGame murderMysteryGame, Player player) {
-        return murderMysteryGame.getMurderMysteryPlayerManager().getPlayer(player.getUniqueId());
+        return murderMysteryGame.getPlayerManager().getPlayer(player.getUniqueId());
     }
 
 }

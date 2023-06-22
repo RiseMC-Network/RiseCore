@@ -86,7 +86,6 @@ public final class RiseCore extends JavaPlugin {
         // set server information
         serverId = getConfigurationFile().get().getString("server.id");
         serverType = ServerType.valueOf(getConfigurationFile().get().getString("server.type"));
-        setServerSpawn();
 
         gson = new Gson();
 
@@ -139,15 +138,5 @@ public final class RiseCore extends JavaPlugin {
 
     public static RiseCore getInstance() {
         return instance;
-    }
-
-    public void setServerSpawn() {
-        String worldName = getConfigurationFile().get().getString("server.game.name");
-        String[] coordinates = getConfigurationFile().get().getString("server.game.spawn").split(", ");
-
-        World world = getServer().getWorld(worldName);
-        Location location = new Location(world, Float.parseFloat(coordinates[0]), Float.parseFloat(coordinates[1]), Float.parseFloat(coordinates[2]), Float.parseFloat(coordinates[3]), Float.parseFloat(coordinates[4]));
-
-        setSpawnLocation(location);
     }
 }

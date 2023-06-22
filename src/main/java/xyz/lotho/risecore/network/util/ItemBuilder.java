@@ -510,10 +510,6 @@ public class ItemBuilder {
         if(data != null) {
             item.setData(data);
         }
-//        if(enchantments.size() > 0) {
-//            System.out.println(enchantments);
-//            item.addEnchantments(enchantments);
-//        }
         if(displayname != null) {
             meta.setDisplayName(displayname);
         }

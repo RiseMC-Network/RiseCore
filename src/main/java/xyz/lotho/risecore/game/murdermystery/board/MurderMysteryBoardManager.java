@@ -24,7 +24,10 @@ public class MurderMysteryBoardManager {
     }
 
     public FastBoard getBoard(Player player) {
-        return getBoards().getOrDefault(player.getUniqueId(), new FastBoard(player));
+        if (!getBoards().containsKey(player.getUniqueId())) {
+            getBoards().put(player.getUniqueId(), new FastBoard(player));
+        }
+        return getBoards().get(player.getUniqueId());
     }
 
     public void updateBoards() {
@@ -36,9 +39,9 @@ public class MurderMysteryBoardManager {
             lines.add(CC.translate("&m----------------"));
             lines.add("");
             lines.add(CC.translate("&7Role:"));
-            lines.add(CC.translate(" &7- &a" + getMurderMysteryGame().getMurderMysteryPlayerManager().getPlayer(player.getUniqueId()).getRole().getRoleName()));
+            lines.add(CC.translate(" &7- &a" + getMurderMysteryGame().getPlayerManager().getPlayer(player.getUniqueId()).getRole().getRoleName()));
             lines.add("");
-            lines.add(CC.translate("&7Players left: " + getMurderMysteryGame().getMurderMysteryPlayerManager().getAlivePlayers().size()));
+            lines.add(CC.translate("&7Players left: " + getMurderMysteryGame().getPlayerManager().getAlivePlayers().size()));
             lines.add("");
             lines.add(CC.translate("&dTime: " + TimeUtil.formatMillis(getMurderMysteryGame().getGameTime())));
             lines.add("");

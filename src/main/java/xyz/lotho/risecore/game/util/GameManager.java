@@ -2,6 +2,7 @@ package xyz.lotho.risecore.game.util;
 
 import lombok.Getter;
 import org.bukkit.entity.Player;
+import xyz.lotho.risecore.game.util.global.GlobalGameDataManager;
 import xyz.lotho.risecore.network.RiseCore;
 
 import java.util.HashMap;
@@ -11,11 +12,13 @@ import java.util.Map;
 public class GameManager {
 
     private final RiseCore riseCore;
+    private final GlobalGameDataManager globalGameDataManager;
 
     private final Map<Integer, Game> games = new HashMap<>();
 
     public GameManager(RiseCore riseCore) {
         this.riseCore = riseCore;
+        this.globalGameDataManager = new GlobalGameDataManager(riseCore);
     }
 
     public Game findGameByUuid(int id) {

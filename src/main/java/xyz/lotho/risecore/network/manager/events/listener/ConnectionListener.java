@@ -26,13 +26,13 @@ public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onAsyncLogin(AsyncPlayerPreLoginEvent event) {
-        Tasks.runAsync(() -> {
-            Profile profile = getRiseCore().getProfileManager().loadProfile(event.getUniqueId(), event.getName());
+        // TODO: check if player is banned
 
-            if (profile == null) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, CC.RED + "Error loading your profile!");
-            }
-        });
+        Profile profile = getRiseCore().getProfileManager().loadProfile(event.getUniqueId(), event.getName());
+
+        if (profile == null) {
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, CC.RED + "Error loading your profile!");
+        }
     }
 
     @EventHandler
@@ -48,10 +48,6 @@ public class ConnectionListener implements Listener {
             StaffJoinPacket staffJoinPacket = new StaffJoinPacket(getRiseCore().getServerId(), player.getName());
             getRiseCore().getRedisManager().sendPacket(staffJoinPacket, false);
         }
-
-//        if (getRiseCore().getServerType() == ServerType.GAME) {
-//            player.teleport(getRiseCore().getSpawnLocation());
-//        }
     }
 
     @EventHandler

@@ -25,7 +25,10 @@ public class DuelsBoardManager {
     }
 
     public FastBoard getBoard(Player player) {
-        return getBoards().getOrDefault(player.getUniqueId(), new FastBoard(player));
+        if (!getBoards().containsKey(player.getUniqueId())) {
+            getBoards().put(player.getUniqueId(), new FastBoard(player));
+        }
+        return getBoards().get(player.getUniqueId());
     }
 
     public void updateBoards() {

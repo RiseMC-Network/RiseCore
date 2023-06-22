@@ -67,6 +67,11 @@ public class DuelGame extends Game {
     }
 
     @Override
+    public long getStartTime() {
+        return startTime;
+    }
+
+    @Override
     public int getGameId() {
         return this.gameStartPacket.getGameId();
     }
@@ -88,13 +93,13 @@ public class DuelGame extends Game {
 
         switch (state) {
             case WAITING -> {
-                BukkitTask gameTickTask = getRiseCore().getServer().getScheduler().runTaskTimer(getRiseCore(), this::gameTick, 0L, 20L);
-                this.gameTickTaskId = gameTickTask.getTaskId();
-
                 getGameStartPacket().getPlayerNames().forEach(playerName -> {
                     Player player = getRiseCore().getServer().getPlayer(playerName);
                     if (player != null) getGamePlayerManager().addPlayer(player.getUniqueId());
                 });
+
+                BukkitTask gameTickTask = getRiseCore().getServer().getScheduler().runTaskTimer(getRiseCore(), this::gameTick, 0L, 20L);
+                this.gameTickTaskId = gameTickTask.getTaskId();
 
                 getDuelsTeamManager().loadTeams();
                 getWorldManager().loadMap();
@@ -105,6 +110,7 @@ public class DuelGame extends Game {
             case PLAYING -> announce("&aThe game has started!");
             case ENDED -> {
                 DuelsTeam winningDuelsTeam = getDuelsTeamManager().getWinningTeam();
+                announce(DuelsGameUtils.winningMessage(winningDuelsTeam));
 
                 // add winning prize (20 gold) to each player on winning team
                 winningDuelsTeam.getTeamPlayers().forEach(teamPlayer -> {
@@ -115,8 +121,6 @@ public class DuelGame extends Game {
                     teamPlayer.getPlayer().sendMessage(CC.translate("&6&l+20 Gold"));
                 });
 
-                announce(DuelsGameUtils.winningMessage(winningDuelsTeam));
-
                 getRiseCore().getServer().getScheduler().runTaskLater(getRiseCore(), this::endGame, 100L);
             }
         }
@@ -124,6 +128,8 @@ public class DuelGame extends Game {
 
     @Override
     public void gameTick() {
+        updateGlobalGameData();
+
         switch (getGameState()) {
             case GRACE -> {
                 getDuelsBoardManager().updateBoards();

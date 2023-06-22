@@ -18,6 +18,10 @@ public class GameEndPacket extends Packet {
 
     @Override
     public void onReceive() {
+        // handle removing the actual game instance on the game server
         RiseCore.getInstance().getGameManager().removeGame(getGameId());
+
+        // handle removing the game data from every other server on the network
+        RiseCore.getInstance().getGameManager().getGlobalGameDataManager().removeGlobalGameData(getGameId());
     }
 }

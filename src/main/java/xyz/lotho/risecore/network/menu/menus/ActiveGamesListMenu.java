@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import xyz.lotho.risecore.network.RiseCore;
 import xyz.lotho.risecore.network.menu.util.Menu;
 import xyz.lotho.risecore.network.util.ItemBuilder;
+import xyz.lotho.risecore.network.util.TimeUtil;
 
 @Getter
 public class ActiveGamesListMenu extends Menu {
@@ -20,7 +21,7 @@ public class ActiveGamesListMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return "Games";
+        return "Active Games";
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ActiveGamesListMenu extends Menu {
             else getInventory().setItem(i, getFillerGlass());
         }
 
-        if (getRiseCore().getGameManager().getGames().isEmpty()) {
+        if (getRiseCore().getGameManager().getGlobalGameDataManager().getGlobalGameData().isEmpty()) {
             ItemStack noGames = new ItemBuilder(Material.RED_BANNER)
                     .setDisplayname("&cNo games found!")
                     .lore(
@@ -47,13 +48,16 @@ public class ActiveGamesListMenu extends Menu {
 
             getInventory().setItem(31, noGames);
         } else {
-            getRiseCore().getGameManager().getGames().forEach((id, game) -> {
+            getRiseCore().getGameManager().getGlobalGameDataManager().getGlobalGameData().forEach((id, game) -> {
                 ItemStack gameIcon = new ItemBuilder(game.getGameType().getGameIcon())
                         .setDisplayname("&egame-" + game.getGameId())
                         .lore(
+                                "&7State: &d" + game.getGameState().name(),
                                 " ",
                                 "&7Type: &f" + game.getGameType().name(),
-                                "&7Server: &f" + game.getGameServer().getId(),
+                                "&7Server: &f" + game.getServerId(),
+                                "&7Players: &f" + game.getPlayers().size(),
+                                "&7Time: " + TimeUtil.formatMillis(System.currentTimeMillis() - game.getStartTime()),
                                 "",
                                 "&7(Click to travel to game)"
                         )
@@ -67,6 +71,6 @@ public class ActiveGamesListMenu extends Menu {
 
     @Override
     public void handleClick(InventoryClickEvent event) {
-        event.setCancelled(true);
+
     }
 }

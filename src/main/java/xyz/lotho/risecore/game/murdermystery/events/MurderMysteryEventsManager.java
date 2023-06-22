@@ -30,6 +30,7 @@ public class MurderMysteryEventsManager {
         addListener(new MurderMysteryShootBowListener(riseCore));
         addListener(new MurderMysteryDamageEventListener(riseCore));
         addListener(new MurderMysteryInventoryMoveListener(riseCore));
+        addListener(new MurderMysteryDisconnectListener(riseCore));
 
         loadListeners();
     }

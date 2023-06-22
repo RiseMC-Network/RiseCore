@@ -23,10 +23,15 @@ public class MurderMysteryInventoryMoveListener implements Listener {
     public void onMove(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
+        System.out.println("InventoryMoveEvent");
+        System.out.println(event.getInventory().getType());
+
         Game game = getRiseCore().getGameManager().findGameByPlayer(player);
         if (game == null || game.getGameType() != GameType.MURDER_MYSTERY) return;
 
-        if (event.getInventory().getType() == InventoryType.PLAYER) {
+        System.out.println("got past game check");
+
+        if (event.getInventory().getType() == InventoryType.CRAFTING) {
             event.setCancelled(true);
         }
     }

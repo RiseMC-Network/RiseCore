@@ -1,11 +1,15 @@
 package xyz.lotho.risecore.game.util;
 
 import org.bukkit.entity.Player;
+import xyz.lotho.risecore.network.RiseCore;
+import xyz.lotho.risecore.network.database.redis.packet.game.GameUpdateDataPacket;
 import xyz.lotho.risecore.network.manager.server.Server;
 
 import java.util.ArrayList;
 
 public abstract class Game {
+
+    public abstract long getStartTime();
 
     public abstract int getGameId();
 
@@ -26,5 +30,18 @@ public abstract class Game {
     public abstract GameType getGameType();
 
     public abstract Server getGameServer();
+
+    public void updateGlobalGameData() {
+        GameUpdateDataPacket gameUpdateDataPacket = new GameUpdateDataPacket(
+                getGameServer().getId(),
+                getGameId(),
+                getGameType(),
+                getGameState(),
+                getGamePlayers().stream().map(Player::getName).toList(),
+                getStartTime()
+        );
+
+        RiseCore.getInstance().getRedisManager().sendPacket(gameUpdateDataPacket, false);
+    }
 
 }

@@ -38,7 +38,7 @@ public class MurderMysteryGame extends Game {
 
     private final Configuration mapConfiguration;
     private final MapManager mapManager;
-    private final MurderMysteryPlayerManager murderMysteryPlayerManager;
+    private final MurderMysteryPlayerManager playerManager;
     private final MurderMysteryWorldManager worldManager;
     private final MurderMysteryBoardManager boardManager;
     private final MurderMysteryEventsManager eventsManager;
@@ -56,7 +56,7 @@ public class MurderMysteryGame extends Game {
 
         mapConfiguration = new Configuration(getRiseCore(), "maps");
         mapManager = new MapManager(getRiseCore(), this);
-        murderMysteryPlayerManager = new MurderMysteryPlayerManager(getRiseCore());
+        playerManager = new MurderMysteryPlayerManager(getRiseCore());
         worldManager = new MurderMysteryWorldManager(getRiseCore(), this);
         boardManager = new MurderMysteryBoardManager(getRiseCore(), this);
         eventsManager = new MurderMysteryEventsManager(getRiseCore(), this);
@@ -70,6 +70,11 @@ public class MurderMysteryGame extends Game {
 
     public long getGameTime() {
         return System.currentTimeMillis() - startTime;
+    }
+
+    @Override
+    public long getStartTime() {
+        return startTime;
     }
 
     @Override
@@ -89,18 +94,18 @@ public class MurderMysteryGame extends Game {
 
         switch (gameState) {
             case WAITING -> {
-                BukkitTask gameTickTask = getRiseCore().getServer().getScheduler().runTaskTimer(getRiseCore(), this::gameTick, 0L, 20L);
-                this.gameTickTaskId = gameTickTask.getTaskId();
-
                 getGameStartPacket().getPlayerNames().forEach(playerName -> {
                     Player player = getRiseCore().getServer().getPlayer(playerName);
-                    if (player != null) getMurderMysteryPlayerManager().addPlayer(player.getUniqueId());
+                    if (player != null) getPlayerManager().addPlayer(player.getUniqueId());
                 });
+
+                BukkitTask gameTickTask = getRiseCore().getServer().getScheduler().runTaskTimer(getRiseCore(), this::gameTick, 0L, 20L);
+                this.gameTickTaskId = gameTickTask.getTaskId();
 
                 getWorldManager().loadMap();
             }
             case PLAYING -> {
-                List<MurderMysteryPlayer> players = new ArrayList<>(murderMysteryPlayerManager.getPlayers().values());
+                List<MurderMysteryPlayer> players = new ArrayList<>(playerManager.getPlayers().values());
 
                 // Shuffle so roles are always random
                 Collections.shuffle(players);
@@ -121,11 +126,11 @@ public class MurderMysteryGame extends Game {
             }
             case ENDED -> {
                 // TODO: FIND WINNER, REWARDS, ETC
-                GameRole winningRole = getMurderMysteryPlayerManager().getWinningRole();
-                announce(MurderMysteryUtils.winningMessage(winningRole, getMurderMysteryPlayerManager()));
+                GameRole winningRole = getPlayerManager().getWinningRole();
+                announce(MurderMysteryUtils.winningMessage(winningRole, getPlayerManager()));
 
                 // add winning prize (20 gold) to each player on winning team
-                getMurderMysteryPlayerManager().getAllAlivePlayers().forEach(teamPlayer -> {
+                getPlayerManager().getAllAlivePlayers().forEach(teamPlayer -> {
                     Profile profile = getRiseCore().getProfileManager().getProfile(teamPlayer.getUuid());
                     profile.setGold(profile.getGold() + 20);
 
@@ -145,6 +150,8 @@ public class MurderMysteryGame extends Game {
 
     @Override
     public void gameTick() {
+        updateGlobalGameData();
+
         switch (gameState) {
             case PLAYING -> {
                 getBoardManager().updateBoards();
@@ -156,8 +163,11 @@ public class MurderMysteryGame extends Game {
                     endGame();
                 }
 
-                // check if murderer has died
-                if (!getMurderMysteryPlayerManager().isMurdererAlive() || getMurderMysteryPlayerManager().getAlivePlayers().size() < 1) {
+                // check a ton of states to see if game should end
+                if (getPlayerManager().getMurderer() == null ||
+                        !getPlayerManager().isMurdererAlive() ||
+                        getPlayerManager().getAlivePlayers().size() < 1)
+                {
                     setGameState(GameState.ENDED);
                 }
 
@@ -195,7 +205,7 @@ public class MurderMysteryGame extends Game {
 
     @Override
     public ArrayList<Player> getGamePlayers() {
-        return new ArrayList<>(this.murderMysteryPlayerManager.getPlayers().values().stream()
+        return new ArrayList<>(this.playerManager.getPlayers().values().stream()
                 .map(player -> getRiseCore().getServer().getPlayer(player.getUuid()))
                 .toList());
     }
