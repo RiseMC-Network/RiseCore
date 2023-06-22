@@ -1,0 +1,33 @@
+details:
+  author: Lotho
+  version: 1.0
+
+server:
+  id: rise-lobby-1
+  type: "LOBBY"
+  game:
+    name: "gameLobby"
+    spawn: "0.5, 62, 0.5, 31, 0"
+
+tab:
+  header: |
+    
+    &6&lRise&e&lMC
+        &7Playing with &f%online% &7others!    
+
+  footer: |
+    
+    &eplay.risemc.xyz
+
+database:
+  redis:
+    username: "default"
+    password: "TYJhW2jrfGicaowKSkwyEAJrtElt8cHP"
+    address: "redis-13640.c72.eu-west-1-2.ec2.cloud.redislabs.com"
+    port: 13640
+  mongo:
+    username: "admin"
+    password: "admin"
+    address: "cluster0.cexgn.mongodb.net/?retryWrites=true&w=majority"
+    database: "risemc"
+    srv: true

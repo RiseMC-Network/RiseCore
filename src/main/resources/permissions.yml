@@ -1,0 +1,43 @@
+ranks:
+  admin:
+    prefix: "&4&lADMIN "
+    nameColor: "YELLOW"
+    chatColor: "YELLOW"
+    priority: 1
+    default: false
+    permissions:
+      - '*'
+      - 'risecore.admin'
+    inheritance:
+      - 'mod'
+  mod:
+    prefix: "&c&lMOD "
+    nameColor: "YELLOW"
+    chatColor: "YELLOW"
+    priority: 2
+    default: false
+    permissions:
+      - 'minecraft.command.teleport'
+      - 'minecraft.command.give'
+      - 'minecraft.command.clear'
+      - 'minecraft.command.effect'
+    inheritance:
+      - 'helper'
+  helper:
+    prefix: "&b&lHELPER "
+    nameColor: "YELLOW"
+    chatColor: "YELLOW"
+    priority: 3
+    default: false
+    permissions:
+      - 'risecore.staff'
+    inheritance:
+      - 'default'
+  default:
+    prefix: "&7"
+    nameColor: "GRAY"
+    chatColor: "GRAY"
+    priority: 4
+    default: true
+    permissions:
+      - 'risecore.default'

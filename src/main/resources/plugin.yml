@@ -1,0 +1,7 @@
+name: RiseCore
+version: '${project.version}'
+main: xyz.lotho.risecore.network.RiseCore
+api-version: '1.20'
+
+depend: [SlimeWorldManager]
+loadbefore: [RiseLobby]
