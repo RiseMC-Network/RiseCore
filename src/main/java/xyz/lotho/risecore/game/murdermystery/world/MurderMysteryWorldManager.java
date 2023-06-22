@@ -8,7 +8,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import xyz.lotho.risecore.game.GameState;
+import xyz.lotho.risecore.game.util.GameState;
 import xyz.lotho.risecore.game.murdermystery.game.MurderMysteryGame;
 import xyz.lotho.risecore.network.RiseCore;
 

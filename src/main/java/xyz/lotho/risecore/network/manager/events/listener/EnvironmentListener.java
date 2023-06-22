@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import xyz.lotho.risecore.game.Game;
+import xyz.lotho.risecore.game.util.Game;
 import xyz.lotho.risecore.network.RiseCore;
 import xyz.lotho.risecore.network.manager.server.ServerType;
 

@@ -1,4 +1,4 @@
-package xyz.lotho.risecore.game;
+package xyz.lotho.risecore.game.util;
 
 import org.bukkit.entity.Player;
 import xyz.lotho.risecore.network.manager.server.Server;

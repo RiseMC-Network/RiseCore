@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-import xyz.lotho.risecore.game.Game;
+import xyz.lotho.risecore.game.util.Game;
 import xyz.lotho.risecore.network.RiseCore;
 import xyz.lotho.risecore.network.util.CC;
 

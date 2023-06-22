@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.lotho.risecore.game.GameManager;
+import xyz.lotho.risecore.game.util.GameManager;
 import xyz.lotho.risecore.network.command.admin.game.GamesCommand;
 import xyz.lotho.risecore.network.command.admin.server.RequestCommand;
 import xyz.lotho.risecore.network.command.admin.server.ServerManagerCommand;

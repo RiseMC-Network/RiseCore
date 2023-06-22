@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import xyz.lotho.risecore.game.duels.game.DuelGame;
-import xyz.lotho.risecore.game.GameState;
+import xyz.lotho.risecore.game.util.GameState;
 import xyz.lotho.risecore.network.RiseCore;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package xyz.lotho.risecore.game;
+package xyz.lotho.risecore.game.util;
 
 public enum GameState {
 

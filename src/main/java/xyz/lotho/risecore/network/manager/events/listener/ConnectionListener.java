@@ -49,9 +49,9 @@ public class ConnectionListener implements Listener {
             getRiseCore().getRedisManager().sendPacket(staffJoinPacket, false);
         }
 
-        if (getRiseCore().getServerType() == ServerType.GAME) {
-            player.teleport(getRiseCore().getSpawnLocation());
-        }
+//        if (getRiseCore().getServerType() == ServerType.GAME) {
+//            player.teleport(getRiseCore().getSpawnLocation());
+//        }
     }
 
     @EventHandler

@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import xyz.lotho.risecore.game.GameType;
+import xyz.lotho.risecore.game.util.GameType;
 import xyz.lotho.risecore.network.RiseCore;
 import xyz.lotho.risecore.network.database.redis.packet.game.GameStartPacket;
 import xyz.lotho.risecore.network.manager.server.Server;

@@ -2,7 +2,7 @@ package xyz.lotho.risecore.network.database.redis.packet.game;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import xyz.lotho.risecore.game.GameType;
+import xyz.lotho.risecore.game.util.GameType;
 import xyz.lotho.risecore.game.duels.game.DuelGame;
 import xyz.lotho.risecore.game.murdermystery.game.MurderMysteryGame;
 import xyz.lotho.risecore.network.RiseCore;

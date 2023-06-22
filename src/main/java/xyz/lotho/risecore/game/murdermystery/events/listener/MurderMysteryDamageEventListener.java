@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import xyz.lotho.risecore.game.Game;
-import xyz.lotho.risecore.game.GameType;
+import xyz.lotho.risecore.game.util.Game;
+import xyz.lotho.risecore.game.util.GameType;
 import xyz.lotho.risecore.network.RiseCore;
 
 @Getter

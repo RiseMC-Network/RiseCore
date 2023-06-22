@@ -3,8 +3,6 @@ package xyz.lotho.risecore.game.murdermystery.board;
 import fr.mrmicky.fastboard.FastBoard;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-import xyz.lotho.risecore.game.GameState;
-import xyz.lotho.risecore.game.duels.game.DuelGame;
 import xyz.lotho.risecore.game.murdermystery.game.MurderMysteryGame;
 import xyz.lotho.risecore.network.RiseCore;
 import xyz.lotho.risecore.network.util.CC;
