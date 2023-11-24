@@ -1,6 +1,6 @@
 ranks:
   admin:
-    prefix: "&4&lADMIN "
+    prefix: "#db97a2&lADMIN "
     nameColor: "YELLOW"
     chatColor: "YELLOW"
     priority: 1
@@ -11,7 +11,7 @@ ranks:
     inheritance:
       - 'mod'
   mod:
-    prefix: "&c&lMOD "
+    prefix: "#6e0513&lMOD "
     nameColor: "YELLOW"
     chatColor: "YELLOW"
     priority: 2
@@ -24,7 +24,7 @@ ranks:
     inheritance:
       - 'helper'
   helper:
-    prefix: "&b&lHELPER "
+    prefix: "#1877a3&lHELPER "
     nameColor: "YELLOW"
     chatColor: "YELLOW"
     priority: 3
@@ -34,7 +34,7 @@ ranks:
     inheritance:
       - 'default'
   default:
-    prefix: "&7"
+    prefix: "#c0f58e&lMEMBER "
     nameColor: "GRAY"
     chatColor: "GRAY"
     priority: 4

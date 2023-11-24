@@ -48,7 +48,7 @@ public class MongoManager {
         serverApi = ServerApi.builder().version(ServerApiVersion.V1).build();
 
         mongoSettings = MongoClientSettings.builder()
-                .applyConnectionString(new ConnectionString("mongodb+" + (isSrv() ? "srv" : "") + "://" + getUsername() + ":" + getPassword() + "@" + getAddress()))
+                .applyConnectionString(new ConnectionString("mongodb" + (isSrv() ? "+srv" : "") + "://" + getUsername() + ":" + getPassword() + "@" + getAddress()))
                 .serverApi(serverApi)
                 .build();
 

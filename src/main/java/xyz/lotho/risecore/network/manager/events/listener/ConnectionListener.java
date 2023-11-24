@@ -1,5 +1,6 @@
 package xyz.lotho.risecore.network.manager.events.listener;
 
+import com.google.gson.JsonObject;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +12,11 @@ import xyz.lotho.risecore.network.RiseCore;
 import xyz.lotho.risecore.network.database.redis.packet.staff.StaffJoinPacket;
 import xyz.lotho.risecore.network.database.redis.packet.staff.StaffLeavePacket;
 import xyz.lotho.risecore.network.manager.profile.Profile;
-import xyz.lotho.risecore.network.manager.server.ServerType;
 import xyz.lotho.risecore.network.util.CC;
 import xyz.lotho.risecore.network.util.Tasks;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Getter
 public class ConnectionListener implements Listener {
@@ -26,8 +29,6 @@ public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onAsyncLogin(AsyncPlayerPreLoginEvent event) {
-        // TODO: check if player is banned
-
         Profile profile = getRiseCore().getProfileManager().loadProfile(event.getUniqueId(), event.getName());
 
         if (profile == null) {
