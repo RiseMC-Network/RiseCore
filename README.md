@@ -1,15 +1,18 @@
 # RiseCore
 A network core, which includes two minigames, as well as utilizing Redis packets for inter-server communication.
 
-# The Games
-<li>Duels</li>
-Can support any amount of players, and dynamically handles team allocation.
-
-<li>Murder Mystery</li>
-This game can hold 20 people (for performance purposes) and randomly chooses one murderer and one detective, then assigns the rest as Innocent.
-
 # The Systems
 This core primarily uses Redis for its inter-server communication. It handles game, server & player management all in one.
+
+The network utilizes SlimeWorldManager to create seamless, lag-free game worlds for players to enjoy.
+<li>This also allows for easy game management, simple creating, destroying & editing game worlds</li>
+
+# The Games
+Duels
+<li>Can support any amount of players, and dynamically handles team allocation.</li>
+
+Murder Mystery
+<li>This game can hold 20 people (for performance purposes) and randomly chooses one murderer and one detective, then assigns the rest as Innocent.</li>
 
 # Examples
 The reports system uses Redis to publish report messages to staff on every server of the network, as well as add to a report menu with the relevant report information.
